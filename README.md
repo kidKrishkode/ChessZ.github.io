@@ -1,8 +1,6 @@
 # ChessZ ♟️🧠
 **ChessZ** is an engaging chess game designed for playing with friends or challenging a powerful computer AI. Leveraging the min-max algorithm with alpha-beta pruning, ChessZ ensures a strategic and thrilling chess experience for players of all skill levels.
-
 ![ChessZ](https://kidKrishkode.github.io/ChessZ.github.io/images/logo.png)
-
 ## Why "ChessZ"? ♟️
 The name **ChessZ** combines "Chess" and the dynamic "Z" to symbolize the strategic depth and excitement of the game.
 - **Chess** represents the classic game of intellect and strategy.
