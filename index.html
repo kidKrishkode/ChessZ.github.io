@@ -1,0 +1,222 @@
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:image"content="./images/bg.png"name="og:image">
+    <meta content="Chess game for mobile in online, Free play, Simple 2D chess game by kidKrishkode" lang="en-us" name="description">
+    <meta content="ChessZ, Online game, Free game, Html game, 2d game, 1 player, multiplayer, ZChess game, Chess, kidKrishkode" lang="en-us" name="keywords">
+    <title version="1.0">ChessZ</title>
+    <link rel="icon" href="./images/Chess-Pawn.png">
+    <link rel="stylesheet" href="./Components/style.css">
+</head>
+<style id="jsStyle"></style>
+<body onload="user();">
+    <div id="maneMenu">
+        <header><span title="Settings" class="settings" onclick="setting();">&#x2699;</span></header>
+        <img src="./images/logo.png" alt="ChessZ" id="logo"/>
+        <div class="btnHolder">
+            <span class="start-btn" onclick="PlayGame(2);" title="Local games">2 PLAYER</span>
+            <span class="start-btn" onclick="PlayGame(1);" title="Play with computer">1 PLAYER</span>
+            <span class="start-btn" onclick="invalid();" title="Require any help or feedback">HELP</span>
+        </div>
+        <footer><span title="Current Version">Version: 1.0.0</span></footer>
+    </div>
+    <div id="field">
+        <header>
+            <h1 class="fh">ChessZ</h1>
+            <h1 class="sh">ChessZ</h1>
+        </header>
+        <div class="twobtn">
+            <div class="setting" onclick="BacktoMenu();" title="Back to main menu">&#x25C0;</div>
+            <!-- <div class="setting"onclick="invalid();"></div> -->
+        </div>
+        <div class="sidebar top">
+            <div class="bots">
+                <div>♔</div><div class="bot" id="bb0">0</div>
+                <div>♕</div><div class="bot" id="bb1">0</div>
+                <div>♗</div><div class="bot" id="bb2">0</div>
+                <div>♖</div><div class="bot" id="bb3">0</div>
+                <div>♘</div><div class="bot" id="bb4">0</div>
+                <div>♙</div><div class="bot" id="bb5">0</div>
+            </div>
+            <div class="timer"id='bt'>00:00</div>
+        </div>
+        <canvas id="chessCanvas" width="320" height="320"></canvas>
+        <canvas id="chessCanvas2" width="720" height="720"></canvas>
+        <div class="sidebar bottom">
+            <div class="timer"id='wt'>00:00</div>
+            <div class="bots">
+                <div>♔</div><div class="bot" id="wb0">0</div>
+                <div>♕</div><div class="bot" id="wb1">0</div>
+                <div>♗</div><div class="bot" id="wb2">0</div>
+                <div>♖</div><div class="bot" id="wb3">0</div>
+                <div>♘</div><div class="bot" id="wb4">0</div>
+                <div>♙</div><div class="bot" id="wb5">0</div>
+            </div>
+        </div>
+        <div class="bottomMenu">
+            <div title="Back to Home"onclick="invalid();">&#x1f3e1;</div>
+            <div title="Themes"onclick="themes();">&#x1f3a8;</div>
+            <div title="Re-fresh"onclick="startGame(); newClock(currentTeam);"style="color: #260063;">&#x25b6;</div>
+            <div title="Moves return"onclick="moveBack();">&#x1f52e;</div>
+            <div title="Rewords"onclick="invalid();">&#x1f3c6;</div>
+        </div>
+        <h2 id="totalVictories"></h2>
+        <div id="checkBox"></div>
+    </div>
+    <div class="bg_Black">
+        <div class="bg_White" id="choose">
+            <h2>Select Opener</h2>
+            <p>Select an option to push the person, Which person get first move/turn on the game, by</p>
+            <div class="btnHolder">
+                <span class="start-btn" onclick="tose();"title="Tose a coin and select opener">Tose</span>
+                <span class="start-btn" onclick="vote();"title="Direct choose an opener">Vote</span>
+            </div>
+        </div>
+        <div class="bg_White" id="tose">
+            <h2>Tose</h2>
+            <p>Using Random tose with a fare coin, and winer is</p>
+            <div id="tosingCoin">♔</div>
+            <div id="toseName">None</div>
+            <div class="btnHolder">
+                <span class="btn" onclick="BacktoChoose();"title="Back to choose option">&#x25C0;</span>
+                <span class="btn" onclick="toseCoin();"title="Once again">Refresh</span>
+                <span class="btn"onclick="toseOk();"title="Next">&#x25B6;</span>
+            </div>
+        </div>
+        <div class="bg_White" id="vote">
+            <h2><span onclick="BacktoChoose();"title="Back to choose option">&#x25C0;</span>Vote</h2>
+            <p>Direct select an option to choose the opener of this game, via self-settlement</p>
+            <div class="btnHolder">
+                <span class="start-btn" onclick="voting(1);"title="Upper Team in respect of device">Upper Team</span>
+                <span class="start-btn" onclick="voting(0);"title="Lower Team in respect of device">Lower Team</span>
+            </div>
+        </div>
+        <div class="bg_White" id="gameOver">
+            <h2>Game Over!</h2>
+            <p>Checkmate, your KING is down, now I am the winer</p>
+            <div id="winIcon">♔</div>
+            <div id="winName">None</div>
+            <div class="btnHolder">
+                <span class="btn" onclick="overCancel();BacktoMenu();"title="Back to main menu">&#x25C0;</span>
+                <span class="btn" title="Write a feedback about this game">FeedBack</span>
+                <span class="btn" onclick="overCancel();startGame();"title="Play Again!">&#x25B6;</span>
+            </div>
+        </div>
+        <div class="bg_White" id="pawnChange">
+            <h2>Change Pawn</h2>
+            <p>your pawn get a chance to change it self to a high rank pieces, change it to,</p>
+            <div class="flo">
+            	<div class="winIcon"onclick="promoted(4);">♕</div>
+                <div class="winIcon"onclick="promoted(2);">♗</div>
+                <div class="winIcon"onclick="promoted(3);">♖</div>
+                <div class="winIcon"onclick="promoted(1);">♘</div>
+            </div>
+            <div class="flo">
+            	<div class="winName"onclick="promoted(4);">Queen</div>
+                <div class="winName"onclick="promoted(2);">Bishop</div>
+                <div class="winName"onclick="promoted(3);">Rook</div>
+                <div class="winName"onclick="promoted(1);">Knight</div>
+            </div>
+            <div class="btnHolder">
+            	_
+                <span class="btn" onclick="overCancel();BacktoMenu();"title="Just avoid this one and clear this pawn">No Thanks</span>
+                _
+            </div>
+        </div>
+    </div>
+    <div id="settings">
+        <h2>Settings</h2>
+        <div class="closePage"onclick="BacktoMenu();"title="Back to main menu">&times;</div>
+    </div>
+    <div id="theme">
+        <h2>&#x1f3a8; Designs</h2>
+        <div class="closePage"onclick="themeClose();"title="Go Back">&times;</div>
+        <h3>Board style-</h3>
+        <h2 id="boardName">{Board_name}</h2>
+        <div class="flo">
+            <div class="slider" onclick="boardLeft();">&#x25C0;</div>
+            <div id="boardDesign"></div>
+            <div class="slider" onclick="boardRight();">&#x25B6;</div>
+        </div>
+        <div class="btn"id="boardBtn"onclick="boardSelect();">Select</div>
+        <h3>Background style-</h3>
+        <h2 id="bgName">{Bg_name}</h2>
+        <div class="flo">
+            <div class="slider" onclick="bgLeft();">&#x25C0;</div>
+            <div id="bgDesign"></div>
+            <div class="slider" onclick="bgRight();">&#x25B6;</div>
+        </div>
+        <div class="btn"id="bgBtn"onclick="bgSelect();">Select</div>
+    </div>
+    <div id="ground">
+        <header>
+            <h1 class="fh">ChessZ</h1>
+            <h1 class="sh">ChessZ</h1>
+        </header>
+        <div class="twobtn">
+            <div class="setting" onclick="BacktoMenu();" title="Back to main menu">&#x25C0;</div>
+        </div>
+        <div class="sidebar top">
+            <div class="bots">
+                <div>♔</div><div class="bot" id="bb0">0</div>
+                <div>♕</div><div class="bot" id="bb1">0</div>
+                <div>♗</div><div class="bot" id="bb2">0</div>
+                <div>♖</div><div class="bot" id="bb3">0</div>
+                <div>♘</div><div class="bot" id="bb4">0</div>
+                <div>♙</div><div class="bot" id="bb5">0</div>
+            </div>
+            <div class="timer"id='bt'>00:00</div>
+        </div>
+        <div id="board" class="board"></div>
+        <div class="info"style="display:none;">
+            <label style="display:none;">Search depth:
+            <select id="search-depth">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3" selected>3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            </label>
+            <br>
+            <span>Positions evaluated: <span id="position-count"></span></span>
+            <br>
+            <span>Time: <span id="time"></span></span>
+            <br>
+            <span>Positions/s: <span id="positions-per-s"></span> </span>
+            <br>
+            <br>
+            <div id="move-history" class="move-history">
+            </div>
+        </div>
+        <div class="sidebar bottom">
+            <div class="timer"id='wt'>00:00</div>
+            <div class="bots">
+                <div>♔</div><div class="bot" id="wb0">0</div>
+                <div>♕</div><div class="bot" id="wb1">0</div>
+                <div>♗</div><div class="bot" id="wb2">0</div>
+                <div>♖</div><div class="bot" id="wb3">0</div>
+                <div>♘</div><div class="bot" id="wb4">0</div>
+                <div>♙</div><div class="bot" id="wb5">0</div>
+            </div>
+        </div>
+        <div class="bottomMenu">
+            <div title="Back to Home"onclick="invalid();">&#x1f3e1;</div>
+            <div title="Themes"onclick="themes();">&#x1f3a8;</div>
+            <div title="Re-fresh"onclick="PlayGame(1);"style="color: #260063;">&#x25b6;</div>
+            <div title="Moves return"onclick="invalid();">&#x1f52e;</div>
+            <div title="Rewords"onclick="invalid();">&#x1f3c6;</div>
+        </div>
+    </div>
+</body>
+<script src="./Components/default.js"></script>
+<script src="./Components/var.js"></script>
+<script src="./Components/hex.js"></script>
+<script src="./modules/jquery/jquery-3.2.1.min.js"></script>
+<script src="./modules/ai/chess.js"></script>
+<script src="./modules/ai/chessboard-0.3.0.js"></script>
+<script src="./Components/server.js"></script>
+<!-- <script src="./chess-game-using-javascript/Chess Game Using JavaScript/script.js"></script> -->
+</html>
