@@ -157,7 +157,7 @@ var makeBestMove = function(){
     var bestMove = getBestMove(game);
     game.ugly_move(bestMove);
     ground.position(game.fen());
-    console.log(game.fen());
+    // console.log(game.fen());
     renderMoveHistory(game.history());
     if(game.game_over()){
         alert('Game over');

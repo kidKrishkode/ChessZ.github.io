@@ -47,6 +47,7 @@ let timer=[0,1];
 let interval;
 let toseDone=0;
 var temp=0;
+let loader;
 let startS = new Audio();
 startS.src = "./effects/start.mp3";
 let moveS = new Audio();

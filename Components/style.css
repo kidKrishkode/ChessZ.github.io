@@ -3,6 +3,75 @@ body{
     margin: 0;
     /* overflow: hidden; */
 }
+.loading{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(123deg, #260063, #000000, #260063);
+    z-index: 99;
+}
+.loading .centerDia{
+    margin: 20% 48%;
+    color: #fff;
+}
+.loading .centerDia .loader{
+    animation: rotate 1s infinite;
+    height: 50px;
+    width: 50px;
+}
+.loading .centerDia .loader:before,.loading .centerDia .loader:after{
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: 20px;
+    width: 20px;
+}
+.loading .centerDia .loader:before{
+    animation: ball1 1s infinite;
+    background-color: #8F472C;
+    box-shadow: 30px 0 0 #ffc200;
+    margin-bottom: 10px;
+}
+.loading .centerDia .loader:after{
+    animation: ball2 1s infinite;
+    background-color: #ffc200;
+    box-shadow: 30px 0 0 #fff;
+}
+@keyframes rotate{
+    0% { transform: rotate(0deg) scale(0.8) }
+    50% { transform: rotate(360deg) scale(1.2) }
+    100% { transform: rotate(720deg) scale(0.8) }
+}
+@keyframes ball1{
+    0% {
+      box-shadow: 30px 0 0 #ffc200;
+    }
+    50% {
+      box-shadow: 0 0 0 #ffc200;
+      margin-bottom: 0;
+      transform: translate(15px, 15px);
+    }
+    100% {
+      box-shadow: 30px 0 0 #ffc200;
+      margin-bottom: 10px;
+    }
+}
+@keyframes ball2{
+    0% {
+      box-shadow: 30px 0 0 #8F472C;
+    }
+    50% {
+      box-shadow: 0 0 0 #8F472C;
+      margin-top: -20px;
+      transform: translate(15px, 15px);
+    }
+    100% {
+      box-shadow: 30px 0 0 #8F472C;
+      margin-top: 0;
+    }
+}  
 .twobtn{
     position: absolute;
     top: 4%;
@@ -35,8 +104,8 @@ body{
     height: 100%;
 }
 #field canvas{
-    margin: 0px calc((100% - 720px)/2);
-    border: 5px solid #1e1e3e;
+    margin: 0px calc((100% - 440px)/2);
+    border: 3px solid #1e1e3e;
     border-radius: 10px;
     font-family: sans-serif;
 }
@@ -65,8 +134,8 @@ body{
     /* color: #a7a6b3; */
 }
 .sidebar{
-    width: 30%;
-    margin: 2% 35%;
+    width: 40%;
+    margin: 1% 30%;
 }
 .sidebar .bots{
     display: flex;
@@ -79,7 +148,7 @@ body{
     width: calc(100% / 12);
     border: 2px solid #242454;
     border-right: none;
-    font-size: 30px;
+    font-size: 25px;
     text-align: center;
     color: brown;
 }
@@ -94,18 +163,18 @@ body{
     width: 14%;
     text-align: center;
     font-weight: 600;
-    margin: 20px calc((100% - 14%)/2);
-    margin-bottom: -20px;
-    font-size: 22px;
+    margin: 10px calc((100% - 14%)/2);
+    margin-bottom: 0px;
+    font-size: 18px;
     border: 2px solid brown;
     border-radius: 4px;
 }
 #wt{
-    margin: 25px auto;
-    margin-top: -20px;
+    margin: 10px auto;
+    margin-top: 0px;
 }
 #maneMenu{
-    display: block;
+    display: none;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -167,8 +236,8 @@ body{
     margin: 5px;
     margin-bottom: 60px;
     font-weight: bold;
-    font-size: 22px;
-    padding: 15px 0px 15px 10px;
+    font-size: 16px;
+    padding: 10px 0px 10px 10px;
     background: repeating-linear-gradient( 45deg, #ffc800, #ffc800 5px, #ffc200 5px, #ffc200 10px);
     text-shadow: -1px -1px black, 1px 1px #fff;
     color: red;
@@ -285,6 +354,8 @@ body{
     overflow-y: scroll!important;
     overflow-x: hidden;
     z-index: 99;
+    scrollbar-width: thin;
+    scrollbar-color: #ffc200 transparent;
 }
 #settings h2,#theme h2{
     text-align: center;
@@ -352,7 +423,7 @@ body{
     overflow: hidden;
 }
 .slider{
-    padding-top: 16%;
+    padding-top: 14%;
     font-size: 35px;
     cursor: pointer;
 }
@@ -374,8 +445,8 @@ body{
     border: none;
 }
 #bgDesign{
-    width: 720px;
-    height: 720px;
+    width: 440px;
+    height: 440px;
     border-radius: 10px;
     background-size: cover;
     background-repeat: no-repeat;
@@ -397,10 +468,10 @@ body{
   clear: both;
 }
 /* board */
-.board-b72b1 {
-    width: 325px!important;
-    height: 325px;
-    margin: 0px calc((100% - 330px)/2);
+.board-b72b1{
+    width: 440px!important;
+    height: 440px;
+    margin: 0px calc((100% - 440px)/2);
     border: 3px solid #1e1e3e;
     border-radius: 10px;
     -moz-box-sizing: content-box;
@@ -408,12 +479,12 @@ body{
     overflow: hidden;
 }
 .row-5277c{
-    width: 325px;
+    width: 440px;
 }
 /* square */
 .square-55d63{
-    width: calc(325px/8)!important;
-    height: calc(325px/8)!important;
+    width: calc(440px/8)!important;
+    height: calc(440px/8)!important;
     float: left;
     position: relative;
     -webkit-touch-callout: none;
@@ -425,8 +496,9 @@ body{
 }
 .square-55d63 img{
     position: relative;
-    width: calc(325px/8)!important;
-    height: calc(325px/8)!important;
+    width: calc(350px/8)!important;
+    height: calc(350px/8)!important;
+    margin: 5px!important;
 }
 /* white square */
 .white-1e1d7{
@@ -468,6 +540,9 @@ body{
     html{
         width: 100%;/*450px*/
         height: 100%;/*800*/
+    }
+    .loading .centerDia{
+        margin: 50% 45%;
     }
     .twobtn{
         top: 8%;
@@ -592,5 +667,24 @@ body{
     #bgDesign{
         width: 300px;
         height: 300px;
+    }
+    .board-b72b1{
+        width: 320px!important;
+        height: 320px;
+        margin: 0px calc((100% - 320px)/2);
+    }
+    .row-5277c{
+        width: 320px;
+    }
+    /* square */
+    .square-55d63{
+        width: calc(320px/8)!important;
+        height: calc(320px/8)!important;
+    }
+    .square-55d63 img{
+        position: relative;
+        width: calc(300px/8)!important;
+        height: calc(300px/8)!important;
+        margin: 2px!important;
     }
 }

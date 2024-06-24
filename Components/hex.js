@@ -25,7 +25,9 @@ function startGame(){
     updateWhiteCasualities();
     updateBlackCasualities();
     updateTotalVictories();
-    startS.play();
+    setTimeout(()=>{
+        startS.play();
+    },2000);
     document.querySelector('#bt').innerHTML='00:00';
     document.querySelector('#wt').innerHTML='00:00';
 }

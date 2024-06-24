@@ -1,13 +1,41 @@
+function Loader(load){
+    this.load = load;
+}
+Loader.prototype.creat = function(){
+    const loaderEle = document.createElement('div');
+    loaderEle.classList.add("loading");
+    loaderEle.innerHTML = `<div class="centerDia"><div class="loader"></div></div>`;
+    document.body.appendChild(loaderEle);
+}
+Loader.prototype.remove = function(time){
+    if(time<100){
+        return false;
+    }
+    setTimeout(()=>{
+        document.body.removeChild(document.querySelector('.loading'));
+    },time);
+}
+Loader.prototype.flash = function(time){
+    loader = new Loader(true);
+    loader.creat();
+    loader.remove(time);
+}
 function user(){
 	if(isMobileDevice()){
 	    TILE_SIZE = 40;
         FONT_SIZE = "28px Arial";
         BOARD_NAME="chessCanvas";
 	}else{
-		TILE_SIZE = 90;
-        FONT_SIZE = "45px Arial";
+		TILE_SIZE = 55;
+        FONT_SIZE = "30px Arial";
         BOARD_NAME="chessCanvas2";
 	}
+    loader = new Loader(true);
+    loader.creat();
+    loader.remove(2000);
+    setTimeout(()=>{
+        document.getElementById('maneMenu').style.display = "block";
+    },500);
 }
 function isMobileDevice(){
     let regexp = /android|iphone|kindle|ipad/i;
@@ -16,6 +44,7 @@ function isMobileDevice(){
 }
 function PlayGame(id){
     if(id==2){
+        loader = new Loader(true).flash(2000);
         document.getElementById("maneMenu").style.display="none";
         document.getElementById("field").style.display="block";
         onLoad();
@@ -23,11 +52,14 @@ function PlayGame(id){
         document.getElementById("choose").style.display="block";
         MODE = 2;
     }else if(id==1){
+        loader = new Loader(true).flash(2000);
         document.getElementById("maneMenu").style.display="none";
         document.getElementById("ground").style.display="block";
         game = new Chess();
         ground = ChessBoard('board', cfg);
-        startS.play();
+        setTimeout(()=>{
+            startS.play();
+        },2000);
         MODE = 1;
     }else{
         alert("Error!");
@@ -37,6 +69,7 @@ function invalid(){
     alert("Sorry this feature is not avalible now..");
 }
 function setting(){
+    loader = new Loader(true).flash(2000);
     document.getElementById("settings").style.display="block";
     document.getElementById("maneMenu").style.display="none";
     document.getElementById("field").style.display="none";
@@ -129,6 +162,7 @@ function codeChess(id){
     },3000);
 }
 function themes(){
+    loader = new Loader(true).flash(2000);
     document.getElementById("theme").style.display="block";
     document.getElementById("field").style.display="none";
     document.getElementById("ground").style.display="none";
@@ -152,7 +186,7 @@ function boardDesign(){
     if(isMobileDevice()){
         newSize = 296;
     }else{
-        newSize = 720;
+        newSize = 440;
     }
     board.style.width=`${newSize}px`;
     board.style.height=`${newSize}px`;
