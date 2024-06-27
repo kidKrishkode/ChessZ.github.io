@@ -1,0 +1,774 @@
+body{
+    padding: 0;
+    margin: 0;
+    /* overflow: hidden; */
+}
+.loading{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(123deg, #260063, #000000, #260063);
+    z-index: 99;
+}
+.loading .centerDia{
+    margin: 20% 48%;
+    color: #fff;
+}
+.loading .centerDia .loader{
+    animation: rotate 1s infinite;
+    height: 50px;
+    width: 50px;
+}
+.loading .centerDia .loader:before,.loading .centerDia .loader:after{
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: 20px;
+    width: 20px;
+}
+.loading .centerDia .loader:before{
+    animation: ball1 1s infinite;
+    background-color: #8F472C;
+    box-shadow: 30px 0 0 #ffc200;
+    margin-bottom: 10px;
+}
+.loading .centerDia .loader:after{
+    animation: ball2 1s infinite;
+    background-color: #ffc200;
+    box-shadow: 30px 0 0 #fff;
+}
+@keyframes rotate{
+    0% { transform: rotate(0deg) scale(0.8) }
+    50% { transform: rotate(360deg) scale(1.2) }
+    100% { transform: rotate(720deg) scale(0.8) }
+}
+@keyframes ball1{
+    0% {
+      box-shadow: 30px 0 0 #ffc200;
+    }
+    50% {
+      box-shadow: 0 0 0 #ffc200;
+      margin-bottom: 0;
+      transform: translate(15px, 15px);
+    }
+    100% {
+      box-shadow: 30px 0 0 #ffc200;
+      margin-bottom: 10px;
+    }
+}
+@keyframes ball2{
+    0% {
+      box-shadow: 30px 0 0 #8F472C;
+    }
+    50% {
+      box-shadow: 0 0 0 #8F472C;
+      margin-top: -20px;
+      transform: translate(15px, 15px);
+    }
+    100% {
+      box-shadow: 30px 0 0 #8F472C;
+      margin-top: 0;
+    }
+}  
+.twobtn{
+    position: absolute;
+    top: 4%;
+    left: 0;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 10px;
+}
+.setting{
+    color: #8F472C;
+    background: linear-gradient(63deg, #FFDE93, orange);
+    border-radius: 50%;
+    padding: 2px 6px 3px 4px;
+    border-bottom: 2px solid rgba(205, 102, 0, 0.5);
+    border-right: 1px solid rgba(205, 102, 0, 0.5);
+    font-weight: bold;
+    cursor: pointer;
+}
+#field h2,#field h3,#field h4,#settings,#theme{
+    display: none;
+}
+#field,#ground{
+    display: none;
+    background-image: url('../images/wood1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    height: 100%;
+}
+#field canvas{
+    margin: 0px calc((100% - 440px)/2);
+    border: 3px solid #1e1e3e;
+    border-radius: 10px;
+    font-family: sans-serif;
+}
+#chessCanvas,#chessCanvas2{
+    display: none;
+}
+#field header,#ground header{
+    width: 100%;
+    padding: 2px 0px;
+    margin-bottom: 2px;
+    text-align: center;
+}
+#field header h1,#ground header h1{
+    margin: 0px 0px;
+    font-family: sans-serif;
+}
+#field header .fh,#ground header .fh{
+    color: #0c8ff0;
+    text-shadow: 3px 5px 2px #000;
+}
+#field header .sh,#ground header .sh{
+    display: none;
+}
+#field .top,#ground .top{
+    margin-top: 3%;
+    /* color: #a7a6b3; */
+}
+.sidebar{
+    width: 40%;
+    margin: 1% 30%;
+}
+.sidebar .bots{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: 3px solid #242454;
+    border-radius: 8px;
+}
+.sidebar .bots div{
+    width: calc(100% / 12);
+    border: 2px solid #242454;
+    border-right: none;
+    font-size: 25px;
+    text-align: center;
+    color: brown;
+}
+.sidebar .bots .bot{
+    text-align: left;
+    color: #fff;
+    padding-top: 2px;
+    border-left: none;
+}
+.timer{
+    background: #f5e9d9;
+    width: 14%;
+    text-align: center;
+    font-weight: 600;
+    margin: 10px calc((100% - 14%)/2);
+    margin-bottom: 0px;
+    font-size: 18px;
+    border: 2px solid brown;
+    border-radius: 4px;
+}
+#wt{
+    margin: 10px auto;
+    margin-top: 0px;
+}
+#maneMenu{
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    overflow: hidden;
+    background: linear-gradient(123deg, #260063, #000, #260063);
+}
+#maneMenu header{
+    width: 100%;
+    padding: 8px 5px;
+    font-size: 20px;
+    text-align: right;
+}
+#maneMenu header span{
+    margin-right: 15px;
+}
+#maneMenu img{
+	position: relative;
+	width: 25%;
+	margin: 0px calc((100% - 25%)/2);
+	border-radius: 5px;
+	cursor: pointer;
+    outline: none;
+}
+#maneMenu footer{
+    position: absolute;
+    bottom: 2px;
+    width: 100%;
+    text-align: center;
+    padding: 30px 0.01px;
+    font-family: sans-serif;
+    font-weight: 600;
+    color: grey;
+}
+.settings{
+    color: #8F472C;
+    background: linear-gradient(63deg, #FFDE93, orange);
+    border-radius: 50%;
+    padding: 3px 5px 2px 5px;
+    border-bottom: 2px solid rgba(205, 102, 0, 0.5);
+    border-right: 1px solid rgba(205, 102, 0, 0.5);
+    font-weight: bold;
+    cursor: pointer;
+}
+.btnHolder{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin: 0px 40%;
+    padding: 20px auto;
+    position: absolute;
+    top: 55%;
+    left: 0;
+}
+.start-btn{
+    text-align: center;
+    display: inline-block;
+    margin: 5px;
+    margin-bottom: 60px;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 0px 10px 10px;
+    background: repeating-linear-gradient( 45deg, #ffc800, #ffc800 5px, #ffc200 5px, #ffc200 10px);
+    text-shadow: -1px -1px black, 1px 1px #fff;
+    color: red;
+    border-radius: 7px;
+    box-shadow: 0 0.2em #b76113;
+    cursor: pointer;
+    outline: none;
+}
+.start-btn:active,.score-btn:active{
+    box-shadow: none;
+    position: relative;
+    top: 0.2em;
+}
+.bg_Black{
+    display: none;
+    background: #00000044;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.bg_White{
+    background: #f5e9d9;/*dad9d9*/
+    border: 4px solid brown;
+    border-radius: 8px;
+    width: 30%;
+    margin: 0px 34.5%;
+    padding: 5px;
+    position: absolute;
+    top: 33%;
+    left:0;
+    font-family: sans-serif;
+}
+.bg_White h2{
+    margin: 2px;
+    font-size: 25px;
+    color: brown;
+}
+.bg_White h2 span{
+    margin-right: 8px;
+    cursor: pointer;
+}
+.bg_White p{
+    margin-top: 2px;
+    font-size: 16px;
+    color: burlywood;
+}
+#choose,#tose,#vote,#gameOver,#pawnChange{
+    display: none;
+}
+#choose .btnHolder,#vote .btnHolder{
+    position: relative;
+    width: 50%;
+    margin: 0px 25%;
+}
+#tose .btnHolder,#gameOver .btnHolder,#pawnChange .btnHolder{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    width: 40%;
+    margin-left: 30%;
+    color: brown;
+    font-weight: bold;
+}
+#tose .btnHolder .btn,#gameOver .btnHolder .btn,#pawnChange .btnHolder .btn{
+    cursor: pointer;
+}
+#tosingCoin,#winIcon{
+    width: 100%;
+    text-align: center;
+    font-size: 95px;
+    font-weight: bold;
+}
+#toseName,#winName{
+    width: 100%;
+    text-align: center;
+    color: burlywood;
+}
+#gameOver{
+    text-align: center;
+}
+.bg_White .flo,.flo{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+.bg_White .flo .winIcon{
+    font-size: 80px;
+	width: calc((100% /4)-2px);
+	border-radius: 5px;
+	padding: 4px 8px;
+	color: brown;
+	transition: ease 0.8s;
+}
+.bg_White .flo .winIcon:hover{
+	box-shadow: 2px 2px 2px 1px grey;
+    cursor: pointer;
+}
+.bg_White .flo .winName{
+    font-size: 20px;
+	color: burlywood;
+	margin-top: 5px;
+    cursor: pointer;
+}
+#settings,#theme{
+    color: #fff;
+    font-family: sans-serif;
+    height: 100%;
+    max-width: 100%;
+    background: linear-gradient(123deg, #260063, #000, #260063);
+    background-repeat: no-repeat;
+    overflow-y: scroll!important;
+    overflow-x: hidden;
+    z-index: 99;
+    scrollbar-width: thin;
+    scrollbar-color: #ffc200 transparent;
+}
+#settings h2,#theme h2{
+    text-align: center;
+    margin-top: 5px;
+}
+#settings h3,#theme h3{
+    margin-left: 4px;
+}
+.closePage{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 15px;
+    right: 40px;
+    background: linear-gradient(60deg, red, orange);
+    text-align: center;
+    border-radius: 50%;
+    font-size: 35px;
+    cursor: pointer;
+}
+#checkBox{
+    display: none;
+    width: 100%;
+    position: absolute;
+    top: 5%;
+    left: 0%;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: brown;
+    font-family: sans-serif;
+}
+#checkBox span{
+    color: #000;
+    font-weight: normal;
+}
+.bottomMenu{
+    width: 3%;
+    height: 50%;
+    position: absolute;
+    right: 0%;
+    bottom: 25%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background: #ffffff97;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+.bottomMenu div{
+    margin: 6px 0px;
+    color: silver;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.8s ease;
+}
+.bottomMenu div:hover{
+    transform: translateX(-10px);
+}
+#boardDesign{
+    border: 3px solid #1e1e3e;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.slider{
+    padding-top: 14%;
+    font-size: 35px;
+    cursor: pointer;
+}
+#theme .btn{
+    width: 15%;
+    margin: 30px calc(85%/2);
+    background: linear-gradient(46deg, orange, red);
+    text-align: center;
+    padding: 10px 4px;
+    font-size: 22px;
+    border-radius: 50px;
+    border-bottom: 3px solid #2e330c;
+    transition: 0.8s ease;
+    cursor: pointer;
+    outline: none;
+}
+#theme .btn:active{
+    transform: translateY(1px);
+    border: none;
+}
+#bgDesign{
+    width: 440px;
+    height: 440px;
+    border-radius: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+/*new ai stylings start*/
+.board{
+    width: 400px;
+    margin: auto;
+}
+.info{
+    width: 400px;
+    margin: auto;
+}
+.move-history{
+    max-height: 100px;
+    overflow-y: scroll;
+}
+.clearfix-7da63 {
+  clear: both;
+}
+/* board */
+.board-b72b1{
+    width: 440px!important;
+    height: 440px;
+    margin: 0px calc((100% - 440px)/2);
+    border: 3px solid #1e1e3e;
+    border-radius: 10px;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    overflow: hidden;
+}
+.row-5277c{
+    width: 440px;
+}
+/* square */
+.square-55d63{
+    width: calc(440px/8)!important;
+    height: calc(440px/8)!important;
+    float: left;
+    position: relative;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.square-55d63 img{
+    position: relative;
+    width: calc(350px/8)!important;
+    height: calc(350px/8)!important;
+    margin: 5px!important;
+}
+/* white square */
+.white-1e1d7{
+  /* background-color: #f0d9b5;
+  color: #b58863; */
+  background: #f6f6f6;
+  color: transparent;
+}
+/* black square */
+.black-3c85d{
+  /* background-color: #b58863;
+  color: #f0d9b5; */
+  background: #838383;
+  color: transparent;
+}
+/* highlighted square */
+.highlight1-32417, .highlight2-9c5d2 {
+  -webkit-box-shadow: inset 0 0 3px 3px yellow;
+  -moz-box-shadow: inset 0 0 3px 3px yellow;
+  box-shadow: inset 0 0 3px 3px yellow;
+}
+/* notation */
+.notation-322f9 {
+  cursor: default;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  position: absolute;
+}
+.alpha-d2270 {
+  bottom: 1px;
+  right: 3px;
+}
+.numeric-fc462 {
+  top: 2px;
+  left: 2px;
+}
+/*new ai stylings end*/
+small{
+    font-size: 80%;
+    font-weight: 400;
+}
+.form-text{
+    display: block;
+    margin-top: .25rem;
+}
+.text-muted{
+    color: #6c757d !important;
+}
+.setting-option{
+    width: 65%;
+    margin: 20px auto;
+    border-radius: 10px;
+    background: #2d2d34b2;
+    padding: 15px 5px;
+}
+.setting-option .set-left{
+    width: 80%;
+}
+.setting-option .set-right{
+    width: 15%;
+}
+.setting-option .switch{
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+.setting-option .switch input{
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.setting-option .slider{
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #260063;
+    transition: 0.4s;
+}
+.setting-option .slider:before{
+    position: absolute;
+    content: "";
+    width: 26px;
+    height: 26px;
+    left: 4px;
+    bottom: 4px;
+    font-size: 14px;
+    background: #0c8ff0;
+    transition: 0.4s;
+}
+.setting-option input:checked + .slider{
+    background: #f5e9d9;
+}
+.setting-option input:focus + .slider{
+    box-shadow: 0 0 1px #f5e9d9;
+}
+.setting-option input:checked + .slider:before{
+    transform: translateX(26px);
+    background: #8F472C;
+}
+.setting-option .slider.round{
+    border-radius: 34px;
+}
+.setting-option .slider.round:before{
+    border-radius: 50%;
+}
+@media only screen and (max-width: 900px){
+    html{
+        width: 100%;/*450px*/
+        height: 100%;/*800*/
+    }
+    .loading .centerDia{
+        margin: 50% 45%;
+    }
+    .twobtn{
+        top: 8%;
+    }
+    #field{
+        height: 100%;/*850*/
+    }
+    #field canvas{
+        margin: 0px calc((100% - 325px)/2);
+        border: 3px solid #1e1e3e;
+        border-radius: 8px;
+    }
+    #field header{
+        width: 100%;
+    }
+    #field .top,#ground .top{
+        margin-top: 20%;
+    }
+    .sidebar{
+        width: 90%;
+        margin: 2% 5%;
+    }
+    .sidebar .bots{
+        border: 2px solid #242454;
+        border-radius: 5px;
+    }
+    .sidebar .bots div{
+        border: 1px solid #242454;
+        border-right: none;
+        font-size: 20px;
+    }
+    .timer,#wt{
+        width: 14%;
+        margin: 10px 44%;
+        font-size: 14px;
+    }
+    #maneMenu,.bg_Black{
+        width: 100%;
+        height: 100%;/*850*/
+    }
+    #maneMenu img{
+        width: 80%;
+        margin: 0px 10%;
+    }
+    .btnHolder{
+        width: 60%;
+        margin: 0px 20%;
+    }
+    .start-btn{
+        margin-bottom: 30px;
+    }
+    #maneMenu footer{
+        bottom: 2px;
+    }
+    .bg_White{
+        width: 80%;
+        margin: 0px 7.5%;
+    }
+    .bg_White h2{
+        font-size: 24px;
+    }
+    .bg_White p{
+        font-size: 12px;
+    }
+    #tosingCoin,#winIcon{
+        font-size: 65px;
+    }
+    #choose .btnHolder,#vote .btnHolder{
+        width: 70%;
+        margin: 0px 15%;
+    }
+    #gameOver .btnHolder{
+        width: 60%;
+        margin: 30px 0% 10px 20%;
+    }
+    .start-btn{
+        padding: 10px 0px 10px 10px;
+        font-size: 16px;
+    }
+    .closePage{
+        width: 25px;
+        height: 25px;
+        font-size: 25px;
+        position: absolute;
+        top: 5px;
+        right: 10px;
+    }
+    #checkBox{
+        position: absolute;
+        top: 12%;
+        font-size: 18px;
+    }
+    .bg_White .flo .winIcon{
+        font-size: 50px;
+    }
+    .bg_White .flo .winName{
+        font-size: 14px;
+    }
+    .bottomMenu{
+        width: 100%;
+        height: 40px;
+        position: absolute;
+        bottom: 0px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        background: #ffffff97;
+        border-radius: 0px;
+    }
+    .bottomMenu div{
+        font-size: 20px;
+    }
+    .bottomMenu div:hover{
+        transform: translateY(-10px);
+    }
+    .slider{
+        padding-top: 35%;
+        font-size: 16px;
+    }
+    #theme .btn{
+        width: 30%;
+        margin: 10px calc(70%/2);
+        padding: 3px 2px;
+        font-size: 16px;
+    }
+    #bgDesign{
+        width: 300px;
+        height: 300px;
+    }
+    .board-b72b1{
+        width: 320px!important;
+        height: 320px;
+        margin: 0px calc((100% - 320px)/2);
+    }
+    .row-5277c{
+        width: 320px;
+    }
+    /* square */
+    .square-55d63{
+        width: calc(320px/8)!important;
+        height: calc(320px/8)!important;
+    }
+    .square-55d63 img{
+        position: relative;
+        width: calc(300px/8)!important;
+        height: calc(300px/8)!important;
+        margin: 2px!important;
+    }
+    .setting-option{
+        width: 95%;
+        margin: 10px auto;
+        padding: 8px 5px;
+    }
+}

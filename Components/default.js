@@ -35,6 +35,7 @@ function user(){
     loader.remove(2000);
     setTimeout(()=>{
         document.getElementById('maneMenu').style.display = "block";
+        document.getElementById('popups').innerHTML = popups.htmlData;
     },500);
 }
 function isMobileDevice(){
@@ -66,7 +67,7 @@ function PlayGame(id){
     }
 }
 function invalid(){
-    alert("Sorry this feature is not avalible now..");
+    alert("Sorry this feature is not avalible in this version, Try another!..");
 }
 function setting(){
     loader = new Loader(true).flash(2000);
@@ -74,6 +75,7 @@ function setting(){
     document.getElementById("maneMenu").style.display="none";
     document.getElementById("field").style.display="none";
     document.getElementById("ground").style.display="none";
+    document.getElementById("settings").innerHTML = settingPage.htmlData;
 }
 function BacktoMenu(){
     document.getElementById("maneMenu").style.display="block";
@@ -166,6 +168,7 @@ function themes(){
     document.getElementById("theme").style.display="block";
     document.getElementById("field").style.display="none";
     document.getElementById("ground").style.display="none";
+    document.getElementById("theme").innerHTML = themePage.htmlData;
     clearInterval(interval);
     boardDesign();
     bgDesign();
