@@ -9,6 +9,7 @@
     <title version="1.0">ChessZ</title>
     <link rel="icon" href="./images/Chess-Pawn.png"/>
     <link rel="stylesheet" href="./Components/style.css"/>
+    <link rel="stylesheet" href="./Components/origin.css"/>
 </head>
 <style id="jsStyle"></style>
 <body onload="user();">
@@ -16,7 +17,7 @@
         <header><span title="Settings" class="settings" onclick="setting();">&#x2699;</span></header>
         <img src="./images/logo.png" alt="ChessZ" id="logo"/>
         <div class="btnHolder">
-            <span class="start-btn" onclick="PlayGame(2);" title="Local games">2 PLAYER</span>
+            <span class="start-btn" onclick="PlayGame(2);" title="Play with friend (Local games)">2 PLAYER</span>
             <span class="start-btn" onclick="PlayGame(1);" title="Play with computer">1 PLAYER</span>
             <span class="start-btn" onclick="invalid();" title="Require any help or feedback">HELP</span>
         </div>
@@ -65,91 +66,8 @@
         <h2 id="totalVictories"></h2>
         <div id="checkBox"></div>
     </div>
-    <div class="bg_Black">
-        <div class="bg_White" id="choose">
-            <h2>Select Opener</h2>
-            <p>Select an option to push the person, Which person get first move/turn on the game, by</p>
-            <div class="btnHolder">
-                <span class="start-btn" onclick="tose();"title="Tose a coin and select opener">Tose</span>
-                <span class="start-btn" onclick="vote();"title="Direct choose an opener">Vote</span>
-            </div>
-        </div>
-        <div class="bg_White" id="tose">
-            <h2>Tose</h2>
-            <p>Using Random tose with a fare coin, and winer is</p>
-            <div id="tosingCoin">♔</div>
-            <div id="toseName">None</div>
-            <div class="btnHolder">
-                <span class="btn" onclick="BacktoChoose();"title="Back to choose option">&#x25C0;</span>
-                <span class="btn" onclick="toseCoin();"title="Once again">Refresh</span>
-                <span class="btn"onclick="toseOk();"title="Next">&#x25B6;</span>
-            </div>
-        </div>
-        <div class="bg_White" id="vote">
-            <h2><span onclick="BacktoChoose();"title="Back to choose option">&#x25C0;</span>Vote</h2>
-            <p>Direct select an option to choose the opener of this game, via self-settlement</p>
-            <div class="btnHolder">
-                <span class="start-btn" onclick="voting(1);"title="Upper Team in respect of device">Upper Team</span>
-                <span class="start-btn" onclick="voting(0);"title="Lower Team in respect of device">Lower Team</span>
-            </div>
-        </div>
-        <div class="bg_White" id="gameOver">
-            <h2>Game Over!</h2>
-            <p>Checkmate, your KING is down, now I am the winer</p>
-            <div id="winIcon">♔</div>
-            <div id="winName">None</div>
-            <div class="btnHolder">
-                <span class="btn" onclick="overCancel();BacktoMenu();"title="Back to main menu">&#x25C0;</span>
-                <span class="btn" title="Write a feedback about this game">FeedBack</span>
-                <span class="btn" onclick="overCancel();startGame();"title="Play Again!">&#x25B6;</span>
-            </div>
-        </div>
-        <div class="bg_White" id="pawnChange">
-            <h2>Change Pawn</h2>
-            <p>your pawn get a chance to change it self to a high rank pieces, change it to,</p>
-            <div class="flo">
-            	<div class="winIcon"onclick="promoted(4);">♕</div>
-                <div class="winIcon"onclick="promoted(2);">♗</div>
-                <div class="winIcon"onclick="promoted(3);">♖</div>
-                <div class="winIcon"onclick="promoted(1);">♘</div>
-            </div>
-            <div class="flo">
-            	<div class="winName"onclick="promoted(4);">Queen</div>
-                <div class="winName"onclick="promoted(2);">Bishop</div>
-                <div class="winName"onclick="promoted(3);">Rook</div>
-                <div class="winName"onclick="promoted(1);">Knight</div>
-            </div>
-            <div class="btnHolder">
-            	_
-                <span class="btn" onclick="overCancel();BacktoMenu();"title="Just avoid this one and clear this pawn">No Thanks</span>
-                _
-            </div>
-        </div>
-    </div>
-    <div id="settings">
-        <h2>Settings</h2>
-        <div class="closePage"onclick="BacktoMenu();"title="Back to main menu">&times;</div>
-    </div>
-    <div id="theme">
-        <h2>&#x1f3a8; Designs</h2>
-        <div class="closePage"onclick="themeClose();"title="Go Back">&times;</div>
-        <h3>Board style-</h3>
-        <h2 id="boardName">{Board_name}</h2>
-        <div class="flo">
-            <div class="slider" onclick="boardLeft();">&#x25C0;</div>
-            <div id="boardDesign"></div>
-            <div class="slider" onclick="boardRight();">&#x25B6;</div>
-        </div>
-        <div class="btn"id="boardBtn"onclick="boardSelect();">Select</div>
-        <h3>Background style-</h3>
-        <h2 id="bgName">{Bg_name}</h2>
-        <div class="flo">
-            <div class="slider" onclick="bgLeft();">&#x25C0;</div>
-            <div id="bgDesign"></div>
-            <div class="slider" onclick="bgRight();">&#x25B6;</div>
-        </div>
-        <div class="btn"id="bgBtn"onclick="bgSelect();">Select</div>
-    </div>
+    <div class="bg_Black" id="popups"></div>
+    <div id="theme"></div>
     <div id="ground">
         <header>
             <h1 class="fh">ChessZ</h1>
@@ -210,7 +128,11 @@
             <div title="Rewords"onclick="invalid();">&#x1f3c6;</div>
         </div>
     </div>
+    <div id="settings"></div>
 </body>
+<script src="./elements/settingPage.js"></script>
+<script src="./elements/popups.js"></script>
+<script src="./elements/themePage.js"></script>
 <script src="./Components/default.js"></script>
 <script src="./Components/var.js"></script>
 <script src="./Components/hex.js"></script>
@@ -218,5 +140,4 @@
 <script src="./modules/ai/chess.js"></script>
 <script src="./modules/ai/chessboard-0.3.0.js"></script>
 <script src="./Components/server.js"></script>
-<!-- <script src="./chess-game-using-javascript/Chess Game Using JavaScript/script.js"></script> -->
 </html>
