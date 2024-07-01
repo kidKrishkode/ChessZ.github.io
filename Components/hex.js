@@ -26,7 +26,9 @@ function startGame(){
     updateBlackCasualities();
     updateTotalVictories();
     setTimeout(()=>{
-        startS.play();
+        if(settings.test('set1')){
+            startS.play();
+        }
     },2000);
     document.querySelector('#bt').innerHTML='00:00';
     document.querySelector('#wt').innerHTML='00:00';
@@ -210,7 +212,9 @@ function checkValidCapture(x, y){
     else return false;
 }
 function moveSelectedPiece(x, y){
-	moveS.play();
+    if(settings.test('set1')){
+        moveS.play();
+    }
     board.tiles[y][x].pieceType = board.tiles[curY][curX].pieceType;
     board.tiles[y][x].team = board.tiles[curY][curX].team;
     if(board.tiles[y][x].pieceType==0){

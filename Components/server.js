@@ -190,7 +190,9 @@ var renderMoveHistory = function(moves){
 
 };
 var onDrop = function(source, target){
-	moveS.play();
+    if(settings.test('set1')){
+        moveS.play();
+    }
     var move = game.move({
         from: source,
         to: target,

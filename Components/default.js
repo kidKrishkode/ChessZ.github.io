@@ -37,6 +37,7 @@ function user(){
         document.getElementById('maneMenu').style.display = "block";
         document.getElementById('popups').innerHTML = popups.htmlData;
     },500);
+    settings = new Setting(settingSet);
 }
 function isMobileDevice(){
     let regexp = /android|iphone|kindle|ipad/i;
@@ -59,7 +60,9 @@ function PlayGame(id){
         game = new Chess();
         ground = ChessBoard('board', cfg);
         setTimeout(()=>{
-            startS.play();
+            if(settings.test('set1')){
+                startS.play();
+            }
         },2000);
         MODE = 1;
     }else{
@@ -76,6 +79,7 @@ function setting(){
     document.getElementById("field").style.display="none";
     document.getElementById("ground").style.display="none";
     document.getElementById("settings").innerHTML = settingPage.htmlData;
+    settings.setup();
 }
 function BacktoMenu(){
     document.getElementById("maneMenu").style.display="block";
@@ -253,7 +257,7 @@ function boardSelect(){
     .black-3c85d{background:${boardColor[currentBoard].black_tile_color};}`;
 }
 function moveBack(){
-	if(movment.length!=0){
+	if(movment.length!=0 && settings.test('set3')){
 		if(movment[movment.length-1].history==0){
 			let j = movment.length-1;
 		    board.tiles[movment[j].currentLocation[0]][movment[j].currentLocation[1]].pieceType = EMPTY;
@@ -320,5 +324,95 @@ function bgSelect(){
         }
         BgColor[currentBg].equiped=1;
         bgDesign();
+    }
+}
+let settingSet = [
+    {
+        name: "set1",
+        value: "on",
+        desc: "Sound & Effects"
+    },
+    {
+        name: "set2",
+        value: "off",
+        desc: "Music & Effects"
+    },
+    {
+        name: "set3",
+        value: "on",
+        desc: "Move Return"
+    },
+    {
+        name: "set4",
+        value: "on",
+        desc: "Rewards"
+    },
+    {
+        name: "set5",
+        value: "on",
+        desc: "My Activity"
+    },
+];
+function Setting(setUp){
+    this.set = setUp;
+}
+Setting.prototype.test = function(name){
+    for(let i=0; i<settingSet.length; i++){
+        if(settingSet[i].name == name){
+            if(settingSet[i].value == 'on'){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+    return false;
+}
+function settingToggle(id){
+    let index = (id.replace('set',''))*1;
+    if(settingSet[index-1].value=='on'){
+        settingSet[index-1].value = 'off';
+    }else{
+        settingSet[index-1].value = 'on';
+    }
+    if(settingSet[4].desc == 'My Activity' && settingSet[4].value == 'off'){
+        settingSet = [
+            {
+                name: "set1",
+                value: "on",
+                desc: "Sound & Effects"
+            },
+            {
+                name: "set2",
+                value: "off",
+                desc: "Music & Effects"
+            },
+            {
+                name: "set3",
+                value: "off",
+                desc: "Move Return"
+            },
+            {
+                name: "set4",
+                value: "off",
+                desc: "Rewards"
+            },
+            {
+                name: "set5",
+                value: "off",
+                desc: "My Activity"
+            },
+        ];
+        settings.setup();
+        console.warn('Critical Setup: Volatile (onn)!\nForgot all activites and reset as volatile setup..');
+    }
+}
+Setting.prototype.setup = function(){
+    for(let i=0; i<settingSet.length; i++){
+        if(settingSet[i].value=='on'){
+            document.getElementById(settingSet[i].name).checked = true;
+        }else{
+            document.getElementById(settingSet[i].name).checked = false;
+        }
     }
 }
