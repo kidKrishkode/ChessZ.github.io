@@ -9,7 +9,7 @@ const settingPage = {
             </div>
             <div class="set-right">
                 <label class="switch">
-                    <input type="checkbox" checked>
+                    <input type="checkbox" checked="true" id="set1" onchange="settingToggle('set1');">
                     <span class="slider round"></span>
                 </label>
             </div>
@@ -21,7 +21,7 @@ const settingPage = {
             </div>
             <div class="set-right">
                 <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" checked="false" id="set2" onchange="settingToggle('set2');">
                     <span class="slider round"></span>
                 </label>
             </div>
@@ -57,7 +57,7 @@ const settingPage = {
             </div>
             <div class="set-right">
                 <label class="switch">
-                    <input type="checkbox" checked>
+                    <input type="checkbox" checked id="set3" onchange="settingToggle('set3');">
                     <span class="slider round"></span>
                 </label>
             </div>
@@ -69,7 +69,7 @@ const settingPage = {
             </div>
             <div class="set-right">
                 <label class="switch">
-                    <input type="checkbox" checked>
+                    <input type="checkbox" checked id="set4" onchange="settingToggle('set4');">
                     <span class="slider round"></span>
                 </label>
             </div>
@@ -105,7 +105,7 @@ const settingPage = {
             </div>
             <div class="set-right">
                 <label class="switch">
-                    <input type="checkbox" checked>
+                    <input type="checkbox" checked id="set5" onchange="settingToggle('set5');">
                     <span class="slider round"></span>
                 </label>
             </div>
